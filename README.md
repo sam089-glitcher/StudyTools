@@ -3,7 +3,7 @@
 A comprehensive web-based study application featuring a to-do list, flashcards system, and Pomodoro timer to help you stay organized and focused during your study sessions.
 
 ## 🚀 Live Demo
-**[Try the app now!](https://your-username.github.io/study-tools/)**
+**[Try the app now!]([https://your-username.github.io/study-tools/](https://study-tools-two.vercel.app/))**
 
 ## 🌟 Features
 
