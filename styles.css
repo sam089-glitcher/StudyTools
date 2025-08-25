@@ -29,19 +29,49 @@ body {
     margin-bottom: 30px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.header h1 {
-    font-size: 2.5em;
-    font-weight: 700;
-    color: #4f46e5;
-    margin-bottom: 20px;
     text-align: center;
 }
 
-.header h1 i {
-    margin-right: 15px;
-    color: #f59e0b;
+/* Logo Styles */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: #718096;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+.logo-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 0.5px;
 }
 
 .nav-tabs {
