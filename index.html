@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Tools - Todo List, Flashcards & Timers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-graduation-cap"></i> Study Tools</h1>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tool="todo">
+                    <i class="fas fa-list-check"></i> To-Do List
+                </button>
+                <button class="nav-tab" data-tool="flashcards">
+                    <i class="fas fa-clone"></i> Flashcards
+                </button>
+                <button class="nav-tab" data-tool="timer">
+                    <i class="fas fa-clock"></i> Timers
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- To-Do List Tool -->
+            <section id="todo-tool" class="tool-section active">
+                <div class="tool-header">
+                    <h2>To-Do List</h2>
+                    <div class="todo-stats">
+                        <span class="stat">
+                            <span class="stat-number" id="total-tasks">0</span>
+                            <span class="stat-label">Total</span>
+                        </span>
+                        <span class="stat">
+                            <span class="stat-number" id="completed-tasks">0</span>
+                            <span class="stat-label">Completed</span>
+                        </span>
+                        <span class="stat">
+                            <span class="stat-number" id="remaining-tasks">0</span>
+                            <span class="stat-label">Remaining</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="todo-input-section">
+                    <div class="input-group">
+                        <input type="text" id="todo-input" placeholder="Add a new task...">
+                        <select id="priority-select">
+                            <option value="low">Low Priority</option>
+                            <option value="medium" selected>Medium Priority</option>
+                            <option value="high">High Priority</option>
+                        </select>
+                        <button id="add-todo-btn">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </div>
+                </div>
+
+                <div class="todo-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="high">High Priority</button>
+                </div>
+
+                <div class="todo-list" id="todo-list">
+                    <!-- Todo items will be dynamically added here -->
+                </div>
+
+                <div class="todo-actions">
+                    <button id="clear-completed-btn" class="action-btn">
+                        <i class="fas fa-trash"></i> Clear Completed
+                    </button>
+                    <button id="clear-all-btn" class="action-btn danger">
+                        <i class="fas fa-trash-alt"></i> Clear All
+                    </button>
+                </div>
+            </section>
+
+            <!-- Flashcards Tool -->
+            <section id="flashcards-tool" class="tool-section">
+                <div class="tool-header">
+                    <h2>Flashcards</h2>
+                    <div class="flashcard-stats">
+                        <span class="stat">
+                            <span class="stat-number" id="total-cards">0</span>
+                            <span class="stat-label">Total Cards</span>
+                        </span>
+                        <span class="stat">
+                            <span class="stat-number" id="current-card-index">0</span>
+                            <span class="stat-label">Current</span>
+                        </span>
+                        <span class="stat">
+                            <span class="stat-number" id="study-progress">0%</span>
+                            <span class="stat-label">Progress</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flashcard-creation">
+                    <h3>Create New Flashcard</h3>
+                    <div class="card-input-group">
+                        <div class="input-field">
+                            <label for="card-front">Front (Question):</label>
+                            <textarea id="card-front" placeholder="Enter question or front side..."></textarea>
+                        </div>
+                        <div class="input-field">
+                            <label for="card-back">Back (Answer):</label>
+                            <textarea id="card-back" placeholder="Enter answer or back side..."></textarea>
+                        </div>
+                        <button id="add-card-btn">
+                            <i class="fas fa-plus"></i> Add Card
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flashcard-study-area" id="study-area">
+                    <div class="flashcard-container" id="flashcard-container">
+                        <div class="no-cards-message" id="no-cards-message">
+                            <i class="fas fa-clone"></i>
+                            <p>No flashcards available. Create some cards to start studying!</p>
+                        </div>
+                        
+                        <div class="flashcard" id="current-flashcard" style="display: none;">
+                            <div class="card-content">
+                                <div class="card-side front" id="card-front-content">
+                                    <div class="card-text"></div>
+                                </div>
+                                <div class="card-side back" id="card-back-content">
+                                    <div class="card-text"></div>
+                                </div>
+                            </div>
+                            <div class="card-flip-indicator">
+                                <i class="fas fa-redo"></i> Click to flip
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flashcard-controls" id="flashcard-controls">
+                        <button id="prev-card-btn">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <button id="flip-card-btn">
+                            <i class="fas fa-redo"></i> Flip Card
+                        </button>
+                        <button id="next-card-btn">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="flashcard-actions">
+                        <button id="shuffle-cards-btn" class="action-btn">
+                            <i class="fas fa-random"></i> Shuffle
+                        </button>
+                        <button id="reset-study-btn" class="action-btn">
+                            <i class="fas fa-refresh"></i> Reset
+                        </button>
+                        <button id="delete-all-cards-btn" class="action-btn danger">
+                            <i class="fas fa-trash"></i> Delete All
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timer Tool -->
+            <section id="timer-tool" class="tool-section">
+                <div class="tool-header">
+                    <h2>Study Timers</h2>
+                </div>
+
+                <div class="timer-tabs">
+                    <button class="timer-tab active" data-timer="pomodoro">
+                        <i class="fas fa-tomato"></i> Pomodoro Timer
+                    </button>
+                    <button class="timer-tab" data-timer="custom">
+                        <i class="fas fa-stopwatch"></i> Custom Timer
+                    </button>
+                </div>
+
+                <!-- Pomodoro Timer -->
+                <div class="timer-container active" id="pomodoro-timer">
+                    <div class="timer-display">
+                        <div class="timer-circle">
+                            <svg class="timer-progress" viewBox="0 0 100 100">
+                                <circle class="timer-progress-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="timer-progress-fill" cx="50" cy="50" r="45" id="pomodoro-progress"></circle>
+                            </svg>
+                            <div class="timer-time" id="pomodoro-time">25:00</div>
+                        </div>
+                        <div class="timer-status" id="pomodoro-status">Ready to start</div>
+                        <div class="timer-session-info">
+                            <span>Session: </span>
+                            <span id="pomodoro-session">1</span>
+                            <span> | Cycles: </span>
+                            <span id="pomodoro-cycles">0</span>
+                        </div>
+                    </div>
+
+                    <div class="timer-controls">
+                        <button id="pomodoro-start-btn" class="timer-btn primary">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button id="pomodoro-pause-btn" class="timer-btn" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button id="pomodoro-reset-btn" class="timer-btn">
+                            <i class="fas fa-refresh"></i> Reset
+                        </button>
+                        <button id="pomodoro-skip-btn" class="timer-btn">
+                            <i class="fas fa-forward"></i> Skip
+                        </button>
+                    </div>
+
+                    <div class="timer-settings">
+                        <h4>Pomodoro Settings</h4>
+                        <div class="setting-group">
+                            <label>Work Duration:</label>
+                            <input type="number" id="work-duration" min="1" max="60" value="25"> minutes
+                        </div>
+                        <div class="setting-group">
+                            <label>Short Break:</label>
+                            <input type="number" id="short-break" min="1" max="30" value="5"> minutes
+                        </div>
+                        <div class="setting-group">
+                            <label>Long Break:</label>
+                            <input type="number" id="long-break" min="1" max="60" value="15"> minutes
+                        </div>
+                        <div class="setting-group">
+                            <label>
+                                <input type="checkbox" id="auto-start-breaks"> Auto-start breaks
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Timer -->
+                <div class="timer-container" id="custom-timer">
+                    <div class="timer-display">
+                        <div class="timer-circle">
+                            <svg class="timer-progress" viewBox="0 0 100 100">
+                                <circle class="timer-progress-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="timer-progress-fill" cx="50" cy="50" r="45" id="custom-progress"></circle>
+                            </svg>
+                            <div class="timer-time" id="custom-time">00:00</div>
+                        </div>
+                        <div class="timer-status" id="custom-status">Set your timer</div>
+                    </div>
+
+                    <div class="custom-timer-input">
+                        <div class="time-inputs">
+                            <div class="time-input-group">
+                                <input type="number" id="custom-hours" min="0" max="23" value="0">
+                                <label>Hours</label>
+                            </div>
+                            <div class="time-input-group">
+                                <input type="number" id="custom-minutes" min="0" max="59" value="25">
+                                <label>Minutes</label>
+                            </div>
+                            <div class="time-input-group">
+                                <input type="number" id="custom-seconds" min="0" max="59" value="0">
+                                <label>Seconds</label>
+                            </div>
+                        </div>
+                        <button id="set-custom-timer-btn" class="timer-btn">
+                            <i class="fas fa-check"></i> Set Timer
+                        </button>
+                    </div>
+
+                    <div class="timer-controls">
+                        <button id="custom-start-btn" class="timer-btn primary">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button id="custom-pause-btn" class="timer-btn" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button id="custom-reset-btn" class="timer-btn">
+                            <i class="fas fa-refresh"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Audio elements for notifications -->
+    <audio id="timer-end-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmohBTGH0fPTgTAFJHfH8N2QQAoUXrTp66hVFApGn+DyvmohBTGH0fPTgTAFJHfH8N2QQAoUXrTp66hVFApGn+DyvmohBTGH0fPTgTAF" type="audio/wav">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
