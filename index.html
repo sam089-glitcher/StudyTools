@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.18/build/spline-viewer.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -28,6 +29,16 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- 3D Model -->
+            <section class="spline-section" aria-label="3D Model">
+                <div class="tool-header">
+                    <h2>3D Model</h2>
+                </div>
+                <div class="spline-viewer-wrap">
+                    <spline-viewer url="https://prod.spline.design/GYcYWVXbcIdAN4FW/scene.splinecode" loading="lazy"></spline-viewer>
+                </div>
+            </section>
+
             <!-- To-Do List Tool -->
             <section id="todo-tool" class="tool-section active">
                 <div class="tool-header">
